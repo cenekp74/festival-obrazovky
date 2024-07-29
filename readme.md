@@ -1,0 +1,1 @@
+Webserver slouzici pro system obrazovek v mezipatrech na festivalu jeden svet na ohradni (jsnsgekom.cz)
