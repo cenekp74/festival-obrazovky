@@ -1,0 +1,8 @@
+.vscode/
+venv
+app/__pycache__/
+instance/
+app/log_archive
+app/clients.json
+app/config.json
+__pycache__/
