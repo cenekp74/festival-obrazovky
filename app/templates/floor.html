@@ -18,7 +18,7 @@
         <div class="program">
             <table>
                 <tr>
-                    <th>Místnost</th>
+                    <th></th>
                     {% for room in rooms %}
                     <td class=".room">{{ room }}</td>
                     {% endfor %}
@@ -26,13 +26,19 @@
                 <tr>
                     <th>Právě probíhá</th>
                     {% for room in rooms %}
-                    <td id="current-{{ room }}"></td>
+                    <td class="current" id="current-{{ room }}">
+                        <div class="name"></div>
+                        <div class="time"></div>
+                    </td>
                     {% endfor %}
                 </tr>
                 <tr>
-                    <th>Další</th>
+                    <th>Následuje</th>
                     {% for room in rooms %}
-                    <td id="next-{{ room }}"></td>
+                    <td class="next" id="next-{{ room }}">
+                        <div class="name"></div>
+                        <div class="time"></div>
+                    </td>
                     {% endfor %}
                 </tr>
             </table>

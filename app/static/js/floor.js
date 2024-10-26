@@ -31,14 +31,16 @@ function getCurrentAndNextItem(room) {
 function refreshItems() {
     rooms.forEach(room => {
         let [currentItem, nextItem] = getCurrentAndNextItem(room)
-        console.log(currentItem, nextItem)
+
         let currentEle = document.getElementById(`current-${room}`)
         let nextEle = document.getElementById(`next-${room}`)
         if (currentItem) {
-            currentEle.innerHTML = currentItem["name"]
+            currentEle.querySelector('.name').innerHTML = currentItem["name"]
+            currentEle.querySelector('.time').innerHTML = `${currentItem["time_from"]} - ${currentItem["time_to"]}`
         }
         if (nextItem) {
-            nextEle.innerHTML = nextItem["name"]
+            nextEle.querySelector('.name').innerHTML = nextItem["name"]
+            nextEle.querySelector('.time').innerHTML = `${nextItem["time_from"]} - ${currentItem["time_to"]}`
         }
     })
 }
