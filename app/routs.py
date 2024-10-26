@@ -3,14 +3,32 @@ from flask import flash, render_template, redirect, url_for, jsonify, abort, req
 import requests
 from app.utils import hash_sha256
 
+latest_responses = { # posledni odpovedi main serveru ve formatu {patro: {den: odpoved}}
+    0: {},
+    1: {},
+    2: {},
+    3: {},
+    4: {}
+}
+
 @app.route('/patro/<floor>')
 def patro(floor):
+    if not floor.isdigit(): abort(400)
+    floor = int(floor)
+    if not floor in [0, 1, 2, 3, 4]: abort(400)
     try:
         response = requests.get(app.config["DB_SERVER"]+f"/api/query/program_items/floor/{floor}?day={app.config["CURRENT_DAY"]}")
     except requests.exceptions.RequestException as e:
-        return f"Error - server ({app.config["DB_SERVER"]}) is unreachable - {e}"
+        if app.config["CURRENT_DAY"] in latest_responses[floor]:
+            response = latest_responses[floor][app.config["CURRENT_DAY"]]
+        else:
+            return f"Error - server ({app.config["DB_SERVER"]}) is unreachable - {e}"
     if not response.status_code == 200:
-        return f"Error - status code {response.status_code} received from server ({app.config["DB_SERVER"]})"
+        if app.config["CURRENT_DAY"] in latest_responses[floor]:
+            response = latest_responses[floor][app.config["CURRENT_DAY"]]
+        else:
+            return f"Error - status code {response.status_code} received from server ({app.config["DB_SERVER"]})"
+    latest_responses[floor][app.config["CURRENT_DAY"]] = response
     return render_template("floor.html", floor=floor, day=app.config["CURRENT_DAY"], program=response.json())
 
 @app.route('/change_current_day', methods=["POST", "GET"])
