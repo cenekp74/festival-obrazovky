@@ -29,7 +29,12 @@ def patro(floor):
         else:
             return f"Error - status code {response.status_code} received from server ({app.config["DB_SERVER"]})"
     latest_responses[floor][app.config["CURRENT_DAY"]] = response
-    return render_template("floor.html", floor=floor, day=app.config["CURRENT_DAY"], program=response.json())
+    program = response.json()
+    rooms = set()
+    for item in program:
+        rooms.add(item["room"])
+    rooms = list(rooms)
+    return render_template("floor.html", floor=floor, day=app.config["CURRENT_DAY"], program=program, rooms=rooms)
 
 @app.route('/change_current_day', methods=["POST", "GET"])
 def change_current_day():

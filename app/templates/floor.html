@@ -3,13 +3,46 @@
 
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/floor.css') }}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0", shrink-to-fit="no">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <title>JSNO obrazovka - Den {{ day }} Patro {{ floor }}</title>
 </head>
 
 <body>
-    {{ program }}
-    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+    <div class="main">
+        <div class="content">
+            {{ program }}
+        </div>
+    
+        <div class="program">
+            <table>
+                <tr>
+                    <th>Místnost</th>
+                    {% for room in rooms %}
+                    <td class=".room">{{ room }}</td>
+                    {% endfor %}
+                </tr>
+                <tr>
+                    <th>Právě probíhá</th>
+                    {% for room in rooms %}
+                    <td id="current-{{ room }}"></td>
+                    {% endfor %}
+                </tr>
+                <tr>
+                    <th>Další</th>
+                    {% for room in rooms %}
+                    <td id="next-{{ room }}"></td>
+                    {% endfor %}
+                </tr>
+            </table>
+        </div>
+    </div>
+    
+    <script>
+        let rooms = "{{ rooms }}".replace(/[\s\[\]&#39;]/g, '').split(",")
+        let program = {{ program|safe }}
+    </script>
+    <script src="{{ url_for('static', filename='js/floor.js') }}"></script>
 </body>
 </html>
