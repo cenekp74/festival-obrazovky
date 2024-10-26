@@ -25,6 +25,17 @@ body {
     grid-template-rows: 4fr 1fr;
 }
 
+.content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.logo-text-img {
+    width: 95vw;
+    height: fit-content;
+}
+
 .program {
     padding: 1rem;
 }
