@@ -55,6 +55,10 @@ body {
     text-align: center;
 }
 
+.program td:has(> div div:empty) {
+    opacity: .1;
+}
+
 .program td .time {
     font-size: 1.7rem;
 }
