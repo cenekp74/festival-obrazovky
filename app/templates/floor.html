@@ -27,8 +27,10 @@
                     <th>Právě probíhá</th>
                     {% for room in rooms %}
                     <td class="current" id="current-{{ room }}">
-                        <div class="name"></div>
-                        <div class="time"></div>
+                        <div>
+                            <div class="name"></div>
+                            <div class="time"></div>
+                        </div>
                     </td>
                     {% endfor %}
                 </tr>
@@ -36,8 +38,10 @@
                     <th>Následuje</th>
                     {% for room in rooms %}
                     <td class="next" id="next-{{ room }}">
-                        <div class="name"></div>
-                        <div class="time"></div>
+                        <div>
+                            <div class="name"></div>
+                            <div class="time"></div>
+                        </div>
                     </td>
                     {% endfor %}
                 </tr>
