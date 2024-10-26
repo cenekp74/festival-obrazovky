@@ -12,16 +12,19 @@ function getCurrentAndNextItem(room) {
 
     let currentItem = null
     let nextItem = null
+    let closestNextItemDistanceMinutes = Infinity
     for (let i = 0; i < items.length; i++) {
         let startTimeMinutes = timeToMinutes(items[i]["time_from"])
         let endTimeMinutes = timeToMinutes(items[i]["time_to"])
 
         if (currentTimeMinutes >= startTimeMinutes && currentTimeMinutes <= endTimeMinutes) {
             currentItem = items[i]
-            if (i + 1 < items.length) {
-                nextItem = items[i + 1];
-            }
-            break
+        }
+        
+        let itemDistance = startTimeMinutes - currentTimeMinutes;
+        if (itemDistance > 0 && itemDistance < closestNextItemDistanceMinutes) {
+            closestNextItemDistanceMinutes = itemDistance
+            nextItem = items[i]
         }
     }
     
@@ -40,7 +43,7 @@ function refreshItems() {
         }
         if (nextItem) {
             nextEle.querySelector('.name').innerHTML = nextItem["name"]
-            nextEle.querySelector('.time').innerHTML = `${nextItem["time_from"]} - ${currentItem["time_to"]}`
+            nextEle.querySelector('.time').innerHTML = `${nextItem["time_from"]} - ${nextItem["time_to"]}`
         }
     })
 }
