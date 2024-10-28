@@ -31,6 +31,17 @@ function getCurrentAndNextItem(room) {
     return [currentItem, nextItem]
 }
 
+function adjustTextSize(maxFontSize, maxHeight, textEle, minFontSize=1) { // funkce na zmenseni text size pokud se nazev nevejde do containeru (pokud je height textu vyssi nez maxHeight)
+    let fontSize = maxFontSize;
+    textEle.style.fontSize = fontSize + "px";
+
+    while (textEle.scrollHeight > maxHeight && fontSize > minFontSize) {
+        console.log(textEle.scrollHeight)
+        fontSize -= 1;
+        textEle.style.fontSize = fontSize + "px";
+    }
+}
+
 function refreshItems() {
     rooms.forEach(room => {
         let [currentItem, nextItem] = getCurrentAndNextItem(room)
@@ -50,4 +61,10 @@ function refreshItems() {
 
 document.addEventListener('DOMContentLoaded', (event) => {
     refreshItems()
+    document.querySelectorAll(".current .name").forEach(ele => {
+        adjustTextSize(32, 86, ele, 20)
+    })
+    document.querySelectorAll(".next .name").forEach(ele => {
+        adjustTextSize(25.6, 64, ele, 15)
+    })
 });

@@ -28,7 +28,7 @@
                     {% for room in rooms %}
                     <td class="current" id="current-{{ room }}">
                         <div>
-                            <div>
+                            <div> <!-- musi tu byt extra div, aby fungovalo zmensovani textu based na height text elementu (kdyby tu nebyl div navic, tak by .name melo vzdycky stejnou vysku nehlede na font-size) -->
                                 <div class="name"></div>
                             </div>
                             <div class="time"></div>
@@ -41,7 +41,9 @@
                     {% for room in rooms %}
                     <td class="next" id="next-{{ room }}">
                         <div>
-                            <div class="name"></div>
+                            <div>
+                                <div class="name"></div>
+                            </div>
                             <div class="time"></div>
                         </div>
                     </td>
