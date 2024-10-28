@@ -75,6 +75,10 @@ body {
     font-size: 1.2rem;
 }
 
+.program td .name {
+    padding: 0 7px;
+}
+
 .program td.next > div, .program td.current > div {
     background-color: var(--program-item-color);
     border-radius: var(--border-radius);
