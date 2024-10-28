@@ -20,7 +20,7 @@
                 <tr>
                     <th></th>
                     {% for room in rooms %}
-                    <td class=".room">{{ room }}</td>
+                    <td class="room">{{ room }}</td>
                     {% endfor %}
                 </tr>
                 <tr>
@@ -28,7 +28,9 @@
                     {% for room in rooms %}
                     <td class="current" id="current-{{ room }}">
                         <div>
-                            <div class="name"></div>
+                            <div>
+                                <div class="name"></div>
+                            </div>
                             <div class="time"></div>
                         </div>
                     </td>

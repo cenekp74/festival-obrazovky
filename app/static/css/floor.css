@@ -55,6 +55,10 @@ body {
     text-align: center;
 }
 
+.program td.room {
+    font-weight: bold;
+}
+
 .program td:has(> div div:empty) {
     opacity: .1;
 }
@@ -77,13 +81,24 @@ body {
     margin: auto;
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
+}
+
+.program td > div div.time {
+    margin: .3rem;
+}
+
+.program td div div:is(:first-child) {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
     justify-content: center;
 }
 
 .program td.next > div {
-    height: 4rem;
+    height: 6rem;
 }
 
 .program td.current > div {
-    height: 6rem;
+    height: 8rem;
 }
