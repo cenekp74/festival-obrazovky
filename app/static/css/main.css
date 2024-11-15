@@ -1,3 +1,105 @@
+:root {
+    --bg-color: #0e0505;
+    --text-color: #dde2e7;
+    --border-radius: 12px;
+}
+
+
 body {
-    background-color: #0e0505;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    font-family: sans-serif;
+}
+
+.container-form {
+    width: 70%;
+    min-width: 320px;
+    max-width: 500px;
+    margin-top: 3rem;
+    background-color: #11171b;
+    padding: 20px;
+    border-radius: var(--border-radius);
+}
+
+fieldset {
+    padding: 0;
+    margin: 0;
+    border: 0;
+}
+
+legend {
+    border-bottom: 1px solid var(--text-color);
+    float: left;
+    width: 100%;
+    padding: 0;
+    margin-bottom: 1.2rem;
+    font-size: calc(1.275rem + .3vw);
+    line-height: inherit;
+}
+
+label {
+    font-size: 110%;
+}
+
+textarea {
+    width: 100%;
+    resize: vertical;
+    background-color: #37363e;
+    border: 1px var(--bg-color) solid;
+    color: var(--text-color);
+    border-radius: var(--border-radius);
+}
+
+select {
+    background-color: #37363e;
+    color: var(--text-color);
+    border-radius: var(--border-radius);
+    border: 1px solid #3c4d42;
+}
+
+.form-group:not(:last-child) {
+    margin-bottom: 1rem;
+}
+
+input.form-control, input.form-input {
+    width: 100%;
+    background-color: #37363e;
+    color: var(--text-color);
+    border: none;
+    height: 2rem;
+    border-radius: var(--border-radius);
+    text-indent: 5px;
+    font-size: 100%;
+    margin-top: 0.2rem;
+}
+
+input[type='checkbox'].form-control {
+    width: unset;
+    height: 1.2rem;
+}
+
+input.invalid {
+    border-color: #dc3545;
+    padding-right: calc(1.5em + .75rem);
+}
+
+.form-check-input {
+    margin-left: 0;
+}
+
+.form-check label {
+    font-size: 90%;
+}
+
+.form-submit {
+    margin-top: 2rem;
+    width: 100%;
+    margin-bottom: 5px;
+}
+
+.invalid-feedback {
+    width: 100%;
+    margin-top: .25rem;
+    font-size: .875em;
+    color: #dc3545;
 }

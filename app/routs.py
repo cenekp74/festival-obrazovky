@@ -1,7 +1,11 @@
-from app import app
+from app import app, bcrypt
 from flask import flash, render_template, redirect, url_for, jsonify, abort, request
 import requests
 from app.utils import hash_sha256
+from flask_login import login_required, login_user, logout_user, current_user
+from app.forms import LoginForm
+from app.db_classes import User
+
 
 latest_responses = { # posledni odpovedi main serveru ve formatu {patro: {den: odpoved}}
     0: {},
@@ -37,17 +41,31 @@ def patro(floor):
     return render_template("floor.html", floor=floor, day=app.config["CURRENT_DAY"], program=program, rooms=rooms)
 
 @app.route('/change_current_day', methods=["POST", "GET"])
+@login_required
 def change_current_day():
     if request.method == "POST":
-        if not "token" in request.form or not "day" in request.form:
+        if not "day" in request.form:
             abort(403)
-        token = request.form["token"]
         day = request.form["day"]
-        
-        token_hash = hash_sha256(token)
-        if token_hash != app.config["ADMIN_TOKEN_HASH"]:
-            return "Bad token"
         
         app.config["CURRENT_DAY"] = day
         return f"Changed current day to {day}"
     return render_template("change_current_day.html")
+
+#region login
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    form = LoginForm()
+    if form.validate_on_submit():
+        user = User.query.filter_by(username=form.username.data).first()
+        if user and bcrypt.check_password_hash(user.password, form.password.data):
+            login_user(user, remember=form.remember.data)
+            return redirect('/')
+        flash('Přihlášení se nezdařilo - zkontrolujte username a heslo', 'danger')
+    return render_template('login.html', form=form)
+
+@app.route('/logout')
+def logout():
+    logout_user()
+    return redirect(url_for('login'))
+#endregion login
