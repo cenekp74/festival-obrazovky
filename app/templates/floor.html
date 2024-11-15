@@ -11,9 +11,21 @@
 
 <body>
     <div class="main">
-        <div class="content">
-            <img class="logo-text-img" src="{{ url_for('static', filename='img/logo_text.png') }}">
+        <div class="container-top">
+            <div class="content">
+                <img class="logo-text-img" src="{{ url_for('static', filename='img/logo_text.png') }}">
+            </div>
+            <div class="col-right">
+                <div class="copyright">&copy;JSNO 2024</div>
+                <img class="logo-small" src="{{ url_for('static', filename='img/logo.svg') }}"><br>
+                <div class="datetime-container">
+                    <div class="date">16. prosince</div>
+                    <div class="time">8:46:52</div>
+                </div>
+                <div class="program-text">celý program najdete na <a href="https://jsno.cz">jsno.cz</a></div>
+            </div>
         </div>
+        
     
         <div class="program">
             <table>

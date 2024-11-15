@@ -25,14 +25,23 @@ body {
     grid-template-rows: 4fr 1fr;
 }
 
+.container-top {
+    display: grid;
+    grid-template-columns: 64fr 36fr;
+}
+
 .content {
     display: flex;
     justify-content: center;
     align-items: center;
+    padding: .5rem;
+    border-bottom: 1px solid #dde2e722;
+    border-right: 1px solid #dde2e722;
+    border-bottom-right-radius: var(--border-radius);
 }
 
 .logo-text-img {
-    width: 95vw;
+    width: 95%;
     height: fit-content;
 }
 
@@ -105,4 +114,46 @@ body {
 
 .program td.current > div {
     height: 8rem;
+}
+
+.col-right {
+    padding: .5rem;
+    display: flex;
+    justify-content: baseline;
+    align-items: center;
+    flex-direction: column;
+}
+
+.col-right .copyright {
+    position: absolute;
+    top: .3rem;
+    right: .3rem;
+}
+
+.col-right .logo-small {
+    width: 40%;
+    margin: 1rem;
+    margin-bottom: 5rem;
+    margin-top: 5rem;
+}
+
+.datetime-container div {
+    text-align: center;
+    font-size: 3rem;
+    margin: 1rem;
+}
+
+.datetime-container .time {
+    font-weight: bold;
+}
+
+.program-text {
+    position: absolute;
+    bottom: .2rem;
+    right: .2rem;
+    font-size: 1.2rem;
+}
+
+.program-text a {
+    color: var(--text-color);
 }

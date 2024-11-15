@@ -59,12 +59,39 @@ function refreshItems() {
     })
 }
 
+function refreshDateTime() {
+    let now = new Date()
+    const months = [
+        "ledna", "února", "března", "dubna", "května", 
+        "června", "července", "srpna", "září", 
+        "října", "listopadu", "prosince"
+    ];
+
+    let day = String(now.getDate())
+    let month = months[now.getMonth()]
+    let hours = String(now.getHours()).padStart(2, '0')
+    let minutes = String(now.getMinutes()).padStart(2, '0')
+    let seconds = String(now.getSeconds()).padStart(2, '0')
+
+    date = `${day}. ${month}`
+    document.querySelector(".date").innerHTML = date
+
+    time = `${hours}:${minutes}:${seconds}`
+    document.querySelector(".time").innerHTML = time
+}
+
 document.addEventListener('DOMContentLoaded', (event) => {
+    refreshDateTime()
+    setInterval(refreshDateTime, 1000)
     refreshItems()
-    document.querySelectorAll(".current .name").forEach(ele => {
-        adjustTextSize(32, 86, ele, 20)
-    })
-    document.querySelectorAll(".next .name").forEach(ele => {
-        adjustTextSize(25.6, 64, ele, 15)
-    })
+
+    setInterval(function() {
+        refreshItems()
+        document.querySelectorAll(".current .name").forEach(ele => {
+            adjustTextSize(32, 86, ele, 20)
+        })
+        document.querySelectorAll(".next .name").forEach(ele => {
+            adjustTextSize(25.6, 64, ele, 15)
+        })
+    }, 5000)
 });
