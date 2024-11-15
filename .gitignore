@@ -6,3 +6,4 @@ app/log_archive
 app/clients.json
 app/config.json
 __pycache__/
+app/static/slideshow/

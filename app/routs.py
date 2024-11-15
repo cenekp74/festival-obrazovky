@@ -4,6 +4,7 @@ import requests
 from flask_login import login_required, login_user, logout_user, current_user
 from app.forms import LoginForm
 from app.db_classes import User
+import os
 
 @app.route('/')
 @app.route('/index')
@@ -55,6 +56,16 @@ def change_current_day():
         app.config["CURRENT_DAY"] = day
         return f"Changed current day to {day}"
     return render_template("change_current_day.html")
+
+@app.route('/edit_slideshow/day/<dayn>')
+@login_required
+def edit_slideshow_day(dayn):
+    if not dayn.isdigit(): abort(404)
+    dayn = int(dayn)
+    if dayn not in [1,2,3]: abort(404)
+
+    files = os.listdir(f"app/static/slideshow/{dayn}")
+    return render_template("edit_slideshow_day.html", dayn=dayn, files=files)
 
 #region login
 @app.route('/login', methods=['GET', 'POST'])

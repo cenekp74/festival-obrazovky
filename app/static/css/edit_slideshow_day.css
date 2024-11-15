@@ -1,0 +1,29 @@
+.slideshow-images {
+    display: flex;
+    gap: 2rem;
+    margin: 2rem;
+}
+
+.slideshow-images div {
+    height: 12rem;
+    width: 16rem;
+}
+
+.slideshow-images img {
+    height: 9rem;
+    width: 16rem;
+}
+
+.slideshow-images div img {
+    padding-top: .5rem;
+}
+
+.slideshow-images div {
+    position: relative;
+}
+
+.slideshow-images div a.delete-photo {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+}

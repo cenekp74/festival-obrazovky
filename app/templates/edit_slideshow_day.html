@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/edit_slideshow_day.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <title>JSNO obrazovky - slideshow</title>
+</head>
+
+<body>
+    <h1>Editovani slideshow pro den {{ dayn }}</h1>
+    <div class="slideshow-images">
+        {% for file in files %}
+        <div>
+            <a href="{{ url_for('static', filename='slideshow/'+dayn|string+'/'+file) }}">{{ file }}</a>
+            <img src="{{ url_for('static', filename='slideshow/'+dayn|string+'/'+file) }}">
+            <a class="delete-photo" href="">
+                <i class="fa fa-trash"></i>
+            </a>
+        </div>
+        {% endfor %}
+    </div>
+</body>

@@ -3,6 +3,8 @@
     --text-color: #dde2e7;
     --border-radius: 12px;
     --button-color: #4b0900;
+    --link-color: #ffccaa;
+    --hover-link-color: #ff9955;
 }
 
 
@@ -10,6 +12,18 @@ body {
     background-color: var(--bg-color);
     color: var(--text-color);
     font-family: sans-serif;
+}
+
+a {
+    color: var(--link-color);
+}
+
+a:visited {
+    color: var(--link-color);
+}
+
+a:hover {
+    color: var(--hover-link-color);
 }
 
 .container-form {
