@@ -67,6 +67,16 @@ def edit_slideshow_day(dayn):
     files = os.listdir(f"app/static/slideshow/{dayn}")
     return render_template("edit_slideshow_day.html", dayn=dayn, files=files)
 
+@app.route('/edit_slideshow/delete/<dayn>/<filename>')
+@login_required
+def delete_slide(dayn, filename):
+    if not dayn.isdigit(): abort(404)
+    dayn = int(dayn)
+    if dayn not in [1,2,3]: abort(404)
+
+    os.remove(f"app/static/slideshow/{dayn}/{filename}")
+    return redirect(url_for("edit_slideshow_day", dayn=dayn))
+
 #region login
 @app.route('/login', methods=['GET', 'POST'])
 def login():
