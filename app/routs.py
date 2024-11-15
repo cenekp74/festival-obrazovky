@@ -1,11 +1,15 @@
 from app import app, bcrypt
 from flask import flash, render_template, redirect, url_for, jsonify, abort, request
 import requests
-from app.utils import hash_sha256
 from flask_login import login_required, login_user, logout_user, current_user
 from app.forms import LoginForm
 from app.db_classes import User
 
+@app.route('/')
+@app.route('/index')
+@login_required
+def index():
+    return render_template("index.html")
 
 latest_responses = { # posledni odpovedi main serveru ve formatu {patro: {den: odpoved}}
     0: {},

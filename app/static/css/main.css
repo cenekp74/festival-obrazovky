@@ -2,6 +2,7 @@
     --bg-color: #0e0505;
     --text-color: #dde2e7;
     --border-radius: 12px;
+    --button-color: #4b0900;
 }
 
 
@@ -102,4 +103,18 @@ input.invalid {
     margin-top: .25rem;
     font-size: .875em;
     color: #dc3545;
+}
+
+.button-link {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 16px;
+    text-align: center;
+    text-decoration: none;
+    background-color: var(--button-color);
+    color: var(--link-color);
+    border: none;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    font-weight: 600;
 }

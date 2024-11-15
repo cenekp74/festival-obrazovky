@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+    <title>JSNO obrazovky</title>
+</head>
+
+<body>
+    <div class="patra">
+        <a class="button-link" href="{{ url_for('patro', floor='0') }}">Přízemí</a>
+        <a class="button-link" href="{{ url_for('patro', floor='1') }}">1. Patro</a>
+        <a class="button-link" href="{{ url_for('patro', floor='2') }}">2. Patro</a>
+        <a class="button-link" href="{{ url_for('patro', floor='3') }}">3. Patro</a>
+        <a class="button-link" href="{{ url_for('patro', floor='4') }}">4. Patro</a>
+    </div>
+    <a class="button-link" href="{{ url_for('change_current_day') }}">Změnit den</a>
+</body>
