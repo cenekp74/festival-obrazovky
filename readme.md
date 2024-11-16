@@ -5,3 +5,5 @@ Webserver slouzici pro system obrazovek v patrech na festivalu jeden svet na ohr
 - authentikace pomoci flask-login - asi overkill ale zase co jsem zejo
 - /floor vzdycky posila request na hlavni server. pokud dostane odpoved, ulozi ji do promenne latest_responses. pokud nekdy server neodpovi, nacte odpoved ulozenou v latest_respones. POZOR - aby tohle fungovalo, server musi bezet jenom s jednim workerem, protoze workeri nesdileji lokalni promenne
 - velikost text itemu v programu se automaticky zmensuje pokud se nevejdou
+- ve floor.html k nazvu static souboru pridavam nahodny ?v argument, aby je browser necachoval
+- je potreba vzdycky pouzivat jiny nazvy obrazku, jinak je browser nacachuje a bude nejakou dobu trvat nez se objevi nova verze

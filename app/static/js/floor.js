@@ -1,3 +1,10 @@
+// funkce ktera zkontroluje ze je server online a pak reloadne stranku
+function reloadIfServerOnline() {
+    fetch(window.location).then((response) => {
+        window.location.reload(true)
+    })
+}
+
 function timeToMinutes(time) {
     [hours, minutes] = time.split(":").map(Number)
     return hours * 60 + minutes;
@@ -101,6 +108,7 @@ function changeSlide() {
 }
 
 const SLIDE_INTERVAL_S = 20
+const RELOAD_TIME_S = 1800
 
 document.addEventListener('DOMContentLoaded', (event) => {
     refreshDateTime()
@@ -119,4 +127,6 @@ document.addEventListener('DOMContentLoaded', (event) => {
             adjustTextSize(25.6, 64, ele, 15)
         })
     }, 5000)
+
+    setInterval(reloadIfServerOnline, RELOAD_TIME_S * 1000)
 });

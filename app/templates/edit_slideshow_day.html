@@ -9,7 +9,8 @@
 
 {% block body %}
 <h1>Editovani slideshow pro den {{ dayn }}</h1>
-<i>Slidy budou zobrazeny v abecedním pořadí - doporučuju dodržovat pojmenovani 1.jpg, 2.jpg etc.</i>
+<i>Slidy budou zobrazeny v abecedním pořadí - doporučuju dodržovat pojmenovani 1_nazev.jpg, 2_nazev.jpg etc.</i>
+<b>POZOR - nepouzivat stejne nazvy souboru vicekrat - pokud je na serveru napr. 1.jpg a ja nahraju jiny obrazek s nazvem 1.jpg, na obrazovkach muze nejakou dobu zustat ten stary</b>
 <div class="slideshow-images">
     {% for file in files %}
     <div>
