@@ -133,6 +133,7 @@ body {
     justify-content: baseline;
     align-items: center;
     flex-direction: column;
+    position: relative;
 }
 
 .col-right .copyright {
@@ -159,7 +160,7 @@ body {
 }
 
 .program-text {
-    position: absolute;
+    position: fixed;
     bottom: .2rem;
     right: .2rem;
     font-size: 1.2rem;
@@ -167,4 +168,37 @@ body {
 
 .program-text a {
     color: var(--text-color);
+}
+
+.countdown {
+    position: absolute;
+    left: 1rem;
+    top: .2rem;
+}
+
+.countdown svg {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 20px;
+    height: 20px;
+    transform: rotateY(-180deg) rotateZ(-90deg);
+}
+
+.countdown svg circle {
+    stroke-dasharray: 56.5486px;
+    stroke-dashoffset: 0px;
+    stroke-linecap: round;
+    stroke-width: 2px;
+    stroke: white;
+    fill: none ;
+}
+
+@keyframes countdown {
+    from {
+        stroke-dashoffset: 0px;
+    }
+    to {
+        stroke-dashoffset: 56.5486px;
+    }
 }

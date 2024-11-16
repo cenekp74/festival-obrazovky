@@ -81,6 +81,8 @@ function refreshDateTime() {
 }
 
 function changeSlide() {
+    document.querySelector(".countdown svg circle").style.animation = ""
+    document.querySelector(".countdown svg circle").clientHeight // trigger dom reflow
     let currentSlide = 0
     document.querySelectorAll(".slideshow img").forEach(slideEle => {
         if (slideEle.classList.contains("active")) {
@@ -95,9 +97,10 @@ function changeSlide() {
         slideEle.classList.remove("active")
     })
     document.getElementById("slide-"+nextSlide).classList.add("active")
+    document.querySelector(".countdown svg circle").style.animation = `countdown ${SLIDE_INTERVAL_S}s linear infinite forwards`
 }
 
-const SLIDE_INTERVAL_S = 5
+const SLIDE_INTERVAL_S = 20
 
 document.addEventListener('DOMContentLoaded', (event) => {
     refreshDateTime()
