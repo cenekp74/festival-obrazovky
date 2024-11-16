@@ -5,6 +5,7 @@ from flask_login import login_required, login_user, logout_user, current_user
 from app.forms import LoginForm
 from app.db_classes import User
 import os
+from werkzeug.utils import secure_filename
 
 @app.route('/')
 @app.route('/index')
@@ -66,6 +67,36 @@ def edit_slideshow_day(dayn):
 
     files = os.listdir(f"app/static/slideshow/{dayn}")
     return render_template("edit_slideshow_day.html", dayn=dayn, files=files)
+
+@app.post('/edit_slideshow/day/<dayn>')
+@login_required
+def add_slides(dayn):
+    if not dayn.isdigit(): abort(404)
+    dayn = int(dayn)
+    if dayn not in [1,2,3]: abort(404)
+
+    if not request.files:
+        flash("No files received")
+        return redirect(url_for("edit_slideshow_day", dayn=dayn))
+
+    for file in request.files.getlist("files"):
+        fn = secure_filename(file.filename)
+
+        file.seek(0, os.SEEK_END)
+        file_size = file.tell()
+        file.seek(0)
+
+        if not fn.lower().endswith(".jpg"):
+            flash(f"File {fn} není .jpg soubor - doporučuju používat jenom to")
+        if file_size > 20 * 1024 * 1024:
+            flash(f"File {fn} je moc velká - maximum 20MB - ignoring")
+            continue
+        if file_size < .5 * 1024 * 1024:
+            flash(f"File {fn} má nízkou kvalitu - doporučuju používat vyšší")
+
+        flash(f"File {fn} uploaded successfully")
+        file.save(f"app/static/slideshow/{dayn}/{fn}")
+    return redirect(url_for("edit_slideshow_day", dayn=dayn))
 
 @app.route('/edit_slideshow/delete/<dayn>/<filename>')
 @login_required

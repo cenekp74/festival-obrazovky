@@ -132,3 +132,26 @@ input.invalid {
     cursor: pointer;
     font-weight: 600;
 }
+
+.alert {
+    background-color: #682727;
+    border-radius: var(--border-radius);
+    line-height: 2rem;
+    min-width: 30%;
+    max-width: 50%;
+    text-align: center;
+    margin-top: .3rem;
+    font-style: italic;
+    text-indent: 3px;
+    transition: opacity 2s ease-in;
+}
+
+.alert i {
+    float: right;
+    line-height: 2rem;
+    margin-right: 6px;
+    cursor: pointer;
+    padding-right: 4px;
+    padding-left: 4px;
+    color: var(--text-color);
+}

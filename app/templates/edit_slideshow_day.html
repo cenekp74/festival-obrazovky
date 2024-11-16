@@ -1,25 +1,30 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/edit_slideshow_day.css') }}">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-    <title>JSNO obrazovky - slideshow</title>
-</head>
+{% extends 'base.html' %}
 
-<body>
-    <h1>Editovani slideshow pro den {{ dayn }}</h1>
-    <div class="slideshow-images">
-        {% for file in files %}
-        <div>
-            <a href="{{ url_for('static', filename='slideshow/'+dayn|string+'/'+file) }}">{{ file }}</a>
-            <img src="{{ url_for('static', filename='slideshow/'+dayn|string+'/'+file) }}">
-            <a class="delete-photo" href="{{ url_for('delete_slide', filename=file, dayn=dayn) }}" onclick="return confirm('Opravdu chcete smazat soubor?')">
-                <i class="fa fa-trash"></i>
-            </a>
-        </div>
-        {% endfor %}
+{% block head %}
+<title>JSNO obrazovky - slideshow</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/edit_slideshow_day.css') }}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+{% endblock %}
+
+
+{% block body %}
+<h1>Editovani slideshow pro den {{ dayn }}</h1>
+<i>Fotky budou zobrazeny v abecedním pořadí - doporučuju dodržovat pojmenovani 1.jpg, 2.jpg etc.</i>
+<div class="slideshow-images">
+    {% for file in files %}
+    <div>
+        <a href="{{ url_for('static', filename='slideshow/'+dayn|string+'/'+file) }}">{{ file }}</a>
+        <img src="{{ url_for('static', filename='slideshow/'+dayn|string+'/'+file) }}">
+        <a class="delete-photo" href="{{ url_for('delete_slide', filename=file, dayn=dayn) }}" onclick="return confirm('Opravdu chcete smazat soubor?')">
+            <i class="fa fa-trash"></i>
+        </a>
     </div>
-</body>
+    {% endfor %}
+</div>
+<div>
+    <form action="" method="POST" enctype="multipart/form-data">
+        <input type="file" name="files" multiple/> 
+        <input type="submit" value="Upload"> 
+    </form>
+</div>
+{% endblock %}
