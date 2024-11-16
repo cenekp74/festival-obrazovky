@@ -9,7 +9,7 @@
 
 {% block body %}
 <h1>Editovani slideshow pro den {{ dayn }}</h1>
-<i>Fotky budou zobrazeny v abecedním pořadí - doporučuju dodržovat pojmenovani 1.jpg, 2.jpg etc.</i>
+<i>Slidy budou zobrazeny v abecedním pořadí - doporučuju dodržovat pojmenovani 1.jpg, 2.jpg etc.</i>
 <div class="slideshow-images">
     {% for file in files %}
     <div>
@@ -22,6 +22,7 @@
     {% endfor %}
 </div>
 <div>
+    <h2>Upload nových slidů</h2>
     <form action="" method="POST" enctype="multipart/form-data">
         <input type="file" name="files" multiple/> 
         <input type="submit" value="Upload"> 
