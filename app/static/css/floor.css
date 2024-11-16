@@ -30,19 +30,30 @@ body {
     grid-template-columns: 64fr 36fr;
 }
 
-.content {
+.slideshow {
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: .5rem;
+    margin: 0 .5rem .5rem 0;
     border-bottom: 1px solid #dde2e722;
     border-right: 1px solid #dde2e722;
     border-bottom-right-radius: var(--border-radius);
+    width: 1230px;
+    height: 615px;
+    overflow: hidden;
+    position: relative;
 }
 
-.logo-text-img {
-    width: 95%;
-    height: fit-content;
+.slideshow img {
+    width: 100%;
+    border-bottom-right-radius: var(--border-radius);
+    opacity: 0;
+    position: absolute;
+    transition: all 1s;
+}
+
+.slideshow img.active {
+    opacity: 100;
 }
 
 .program {

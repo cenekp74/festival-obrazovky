@@ -80,9 +80,31 @@ function refreshDateTime() {
     document.querySelector(".time").innerHTML = time
 }
 
+function changeSlide() {
+    let currentSlide = 0
+    document.querySelectorAll(".slideshow img").forEach(slideEle => {
+        if (slideEle.classList.contains("active")) {
+            currentSlide = Number(slideEle.id.split("-")[1])
+        }
+    })
+    let nextSlide = currentSlide + 1
+    if (nextSlide > document.querySelectorAll(".slideshow img").length) {
+        nextSlide = 1
+    }
+    document.querySelectorAll(".slideshow img").forEach(slideEle => {
+        slideEle.classList.remove("active")
+    })
+    document.getElementById("slide-"+nextSlide).classList.add("active")
+}
+
+const SLIDE_INTERVAL_S = 5
+
 document.addEventListener('DOMContentLoaded', (event) => {
     refreshDateTime()
     setInterval(refreshDateTime, 1000)
+    changeSlide()
+    setInterval(changeSlide, SLIDE_INTERVAL_S*1000)
+
     refreshItems()
 
     setInterval(function() {

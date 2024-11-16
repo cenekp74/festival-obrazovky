@@ -44,7 +44,11 @@ def patro(floor):
     for item in program:
         rooms.add(item["room"])
     rooms = list(rooms)
-    return render_template("floor.html", floor=floor, day=app.config["CURRENT_DAY"], program=program, rooms=rooms)
+
+    files = os.listdir(f"app/static/slideshow/{app.config["CURRENT_DAY"]}")
+    files.sort()
+
+    return render_template("floor.html", floor=floor, day=app.config["CURRENT_DAY"], program=program, rooms=rooms, slideshow=files)
 
 @app.route('/change_current_day', methods=["POST", "GET"])
 @login_required

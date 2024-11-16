@@ -12,8 +12,10 @@
 <body>
     <div class="main">
         <div class="container-top">
-            <div class="content">
-                <img class="logo-text-img" src="{{ url_for('static', filename='img/logo_text.png') }}">
+            <div class="slideshow">
+                {% for file in slideshow %}
+                <img id="slide-{{ loop.index }}" src="{{ url_for('static', filename='slideshow/'+day|string+'/'+file) }}">
+                {% endfor %}
             </div>
             <div class="col-right">
                 <div class="copyright">&copy;JSNO 2024</div>
