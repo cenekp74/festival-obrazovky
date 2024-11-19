@@ -107,8 +107,20 @@ function changeSlide() {
     document.querySelector(".countdown svg circle").style.animation = `countdown ${SLIDE_INTERVAL_S}s linear infinite forwards`
 }
 
+// funkce ktera posle request na /should-i-reload a pokud dostane 1 tak spusti reloadIfServerOnline
+function checkReload() {
+    fetch("/should-i-reload")
+    .then(response=>response.json())
+    .then(data => {
+        if (data == "1") {
+            reloadIfServerOnline()
+        }
+    })
+}
+
 const SLIDE_INTERVAL_S = 20
 const RELOAD_TIME_S = 1800
+const RELOAD_CHECK_TIME_S = 60
 
 document.addEventListener('DOMContentLoaded', (event) => {
     refreshDateTime()
@@ -129,4 +141,5 @@ document.addEventListener('DOMContentLoaded', (event) => {
     }, 5000)
 
     setInterval(reloadIfServerOnline, RELOAD_TIME_S * 1000)
+    setInterval(checkReload, RELOAD_CHECK_TIME_S * 1000)
 });

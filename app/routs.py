@@ -4,8 +4,10 @@ import requests
 from flask_login import login_required, login_user, logout_user, current_user
 from app.forms import LoginForm
 from app.db_classes import User
+from app.utils import reset_reload_file_in_60s
 import os
 from werkzeug.utils import secure_filename
+import threading
 
 @app.route('/')
 @app.route('/index')
@@ -111,6 +113,26 @@ def delete_slide(dayn, filename):
 
     os.remove(f"app/static/slideshow/{dayn}/{filename}")
     return redirect(url_for("edit_slideshow_day", dayn=dayn))
+
+@app.route('/should-i-reload')
+def should_i_reload():
+    if not "reload.txt" in os.listdir("instance"):
+        with open("instance/reload.txt", "w") as f:
+            f.write("0")
+    return open("instance/reload.txt", "r").read()
+
+@app.route('/reload')
+@login_required
+def reload():
+    if should_i_reload() == "1":
+        flash("Obrazovky jsou právě v procesu reloadování - prosím počkejte minutu")
+        return redirect(url_for('index'))
+    with open("instance/reload.txt", "w") as f:
+        f.write("1")
+    thread = threading.Thread(target=reset_reload_file_in_60s)
+    thread.start()
+    flash("Obrazovky se reloadují do 1 minuty. Prosím počkejte alespoň minutu před dalším pokusem o reload, jinak nebude registrován.")
+    return redirect(url_for('index'))
 
 #region login
 @app.route('/login', methods=['GET', 'POST'])
