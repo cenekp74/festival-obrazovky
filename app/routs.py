@@ -61,7 +61,8 @@ def change_current_day():
         day = request.form["day"]
         
         app.config["CURRENT_DAY"] = day
-        return f"Changed current day to {day}"
+        flash(f"Changed current day to {day}")
+        return redirect(url_for('index'))
     return render_template("change_current_day.html")
 
 @app.route('/edit_slideshow/day/<dayn>')
