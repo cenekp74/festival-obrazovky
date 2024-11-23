@@ -18,3 +18,6 @@ login_manager = LoginManager(app)
 login_manager.login_view = "login"
 
 from app import routs
+
+with open("instance/reload.txt", "w") as f:
+    f.write("0")
