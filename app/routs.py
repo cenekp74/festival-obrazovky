@@ -28,8 +28,12 @@ def patro(floor):
     if not floor.isdigit(): abort(400)
     floor = int(floor)
     if not floor in [0, 1, 2, 3, 4]: abort(400)
+    api_route = f"/api/query/program_items/floor/{floor}?day={app.config["CURRENT_DAY"]}"
+    if floor == 3:
+        api_route = f"/api/get_kavarna_cajovna_items" # ve tretim patre je kavarna a cajovna ne filmy, ale stejne chci response serveru ulozit do latest_responses proto takhle
+
     try:
-        response = requests.get(app.config["DB_SERVER"]+f"/api/query/program_items/floor/{floor}?day={app.config["CURRENT_DAY"]}")
+        response = requests.get(app.config["DB_SERVER"]+api_route)
     except requests.exceptions.RequestException as e:
         if app.config["CURRENT_DAY"] in latest_responses[floor]:
             response = latest_responses[floor][app.config["CURRENT_DAY"]]
@@ -41,14 +45,20 @@ def patro(floor):
         else:
             return f"Error - status code {response.status_code} received from server ({app.config["DB_SERVER"]})"
     latest_responses[floor][app.config["CURRENT_DAY"]] = response
+
+    files = os.listdir(f"app/static/slideshow/{app.config["CURRENT_DAY"]}")
+    files.sort()
+
+    if floor == 3:
+        kavarna_cajovna_items = response.json()
+        return render_template("kavarna_cajovna_floor.html", floor=floor, day=app.config["CURRENT_DAY"], slideshow=files,
+                                kavarna_items=kavarna_cajovna_items["kavarna"], cajovna_items=kavarna_cajovna_items["cajovna"])
+
     program = response.json()
     rooms = set()
     for item in program:
         rooms.add(item["room"])
     rooms = list(rooms)
-
-    files = os.listdir(f"app/static/slideshow/{app.config["CURRENT_DAY"]}")
-    files.sort()
 
     return render_template("floor.html", floor=floor, day=app.config["CURRENT_DAY"], program=program, rooms=rooms, slideshow=files)
 

@@ -1,7 +1,7 @@
 :root {
     --bg-color: #0e0505;
     --text-color: #dde2e7;
-    --program-item-color: #4b0900;
+    --program-item-color: #ec940c;
     --border-radius: 12px;
 }
 
@@ -81,7 +81,7 @@ body {
 }
 
 .program td:has(> div div:empty) {
-    opacity: .1;
+    opacity: .07;
 }
 
 .program td .time {
@@ -103,6 +103,7 @@ body {
 .program td.next > div, .program td.current > div {
     background-color: var(--program-item-color);
     border-radius: var(--border-radius);
+    color: var(--bg-color);
     margin: auto;
     display: flex;
     flex-direction: column;
@@ -202,4 +203,48 @@ body {
     to {
         stroke-dashoffset: 56.5486px;
     }
+}
+
+.kavarna-cajovna-container {
+    padding: 1rem;
+    height: 300px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+
+.kavarna-cajovna-container h1 {
+    margin: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.kavarna-cajovna-container > div {
+    display: flex;
+    height: 6.4rem;
+}
+
+.kavarna-cajovna-item {
+    background-color: var(--program-item-color);
+    border-radius: var(--border-radius);
+    color: var(--bg-color);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 320px;
+    min-width: fit-content;
+    margin: 0 .7rem;
+    height: 100%;
+}
+
+.kavarna-cajovna-item .name {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.kavarna-cajovna-item .price {
+    margin-top: .4rem;
+    font-size: 22px;
 }

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="cs">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/floor.css') }}?v={{ '{:0=6}'.format(range(0, 99999) | random) }}"> <!-- nechci, aby browser cachoval static files, proto pridavam ?v=random cislo -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0", shrink-to-fit="no">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <title>JSNO obrazovka - Den {{ day }} Patro {{ floor }}</title>
+</head>
+
+<body>
+    <div class="main">
+        <div class="container-top">
+            <div class="slideshow">
+                {% for file in slideshow %}
+                <img id="slide-{{ loop.index }}" src="{{ url_for('static', filename='slideshow/'+day|string+'/'+file) }}">
+                {% endfor %}
+            </div>
+            <div class="col-right">
+                <div class="countdown">
+                    <svg>
+                        <circle r="9" cx="10" cy="10"></circle>
+                    </svg>
+                </div>
+                <div class="copyright">&copy;JSNO 2024</div>
+                <img class="logo-small" src="{{ url_for('static', filename='img/logo.svg') }}"><br>
+                <div class="datetime-container">
+                    <div class="date">16. prosince</div>
+                    <div class="time">8:46:52</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="kavarna-cajovna-container">
+            <div>
+                <h1>Kavárna</h1>
+                {% for item in kavarna_items %}
+                <div class="kavarna-cajovna-item">
+                    <div class="name">{{ item.name }}</div>
+                    <div class="price">{{ item.price }},-</div>
+                </div>
+                {% endfor %}
+            </div>
+            <div>
+                <h1>Čajovna</h1>
+                {% for item in cajovna_items %}
+                <div class="kavarna-cajovna-item">
+                    <div class="name">{{ item.name }}</div>
+                    <div class="price">{{ item.price }},-</div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    <script src="{{ url_for('static', filename='js/floor.js') }}?v={{ '{:0=6}'.format(range(0, 99999) | random) }}"></script> <!-- nechci, aby browser cachoval static files, proto pridavam v=random cislo -->
+</body>
+</html>
