@@ -8,6 +8,15 @@
 </head>
 
 <body>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+    {% for category, message in messages %}
+    <div class="alert alert-{{ category }}">
+        {{ message }} <i onclick="setParentDisplayNone(this)" class="fa fa-xmark"></i>
+    </div>
+    {% endfor %}
+    {% endif %}
+    {% endwith %}
     <div class="container container-form">
         <form method="POST" action="">
             {{ form.hidden_tag() }}
@@ -49,4 +58,5 @@
             </div>
         </form>
     </div>
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
 </body>
