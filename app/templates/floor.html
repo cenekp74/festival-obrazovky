@@ -73,7 +73,7 @@
     </div>
     
     <script>
-        let rooms = "{{ rooms }}".replace(/[\s\[\]&#39;]/g, '').split(",")
+        let rooms = {{ rooms|safe }}
         let program = {{ program|safe }}
     </script>
     <script src="{{ url_for('static', filename='js/floor.js') }}?v={{ '{:0=6}'.format(range(0, 99999) | random) }}"></script> <!-- nechci, aby browser cachoval static files, proto pridavam v=random cislo -->
