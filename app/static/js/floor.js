@@ -118,7 +118,7 @@ function checkReload() {
     })
 }
 
-const SLIDE_INTERVAL_S = 20
+const SLIDE_INTERVAL_S = 10
 const RELOAD_TIME_S = 1800
 const RELOAD_CHECK_TIME_S = 60
 
