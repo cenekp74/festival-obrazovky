@@ -1,0 +1,250 @@
+:root {
+    --bg-color: #0e0505;
+    --text-color: #dde2e7;
+    --program-item-color: #ec940c;
+    --border-radius: 12px;
+}
+
+body {
+    margin: 0;
+    font-family: "Roboto", sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    overflow: hidden;
+}
+
+* {
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.main {
+    display: grid;
+    width: 100svw;
+    height: 100svh;
+    grid-template-columns: 1;
+    grid-template-rows: 4fr 1fr;
+}
+
+.container-top {
+    display: grid;
+    grid-template-columns: 64fr 36fr;
+}
+
+.slideshow {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 .5rem .5rem 0;
+    border-bottom: 1px solid #dde2e722;
+    border-right: 1px solid #dde2e722;
+    border-bottom-right-radius: var(--border-radius);
+    width: 1230px;
+    height: 691px;
+    overflow: hidden;
+    position: relative;
+}
+
+.slideshow img {
+    width: 100%;
+    border-bottom-right-radius: var(--border-radius);
+    opacity: 0;
+    position: absolute;
+    transition: all 1s;
+}
+
+.slideshow img.active {
+    opacity: 100;
+}
+
+.program {
+    padding: 1rem;
+}
+
+.program table {
+    font-size: 2rem;
+    border-spacing: .5rem;
+}
+
+.program th {
+    text-align: left;
+    height: 2rem;
+}
+
+.program td {
+    width: 300px;
+    text-align: center;
+}
+
+.program td.room {
+    font-weight: bold;
+}
+
+.program td:has(> div div:empty) {
+    opacity: .07;
+}
+
+.program td .time {
+    font-size: 1.7rem;
+}
+
+.program td.next {
+    font-size: 1.6rem;
+}
+
+.program td.next .time {
+    font-size: 1.2rem;
+}
+
+.program td .name {
+    padding: 0 7px;
+}
+
+.program td.next > div, .program td.current > div {
+    background-color: var(--program-item-color);
+    border-radius: var(--border-radius);
+    color: var(--bg-color);
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.program td > div div.time {
+    margin: .3rem;
+}
+
+.program td > div > div:is(:first-child) {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.program td.next > div {
+    height: 6rem;
+}
+
+.program td.current > div {
+    height: 8rem;
+}
+
+.col-right {
+    padding: .5rem;
+    display: flex;
+    justify-content: baseline;
+    align-items: center;
+    flex-direction: column;
+    position: relative;
+}
+
+.col-right .copyright {
+    position: absolute;
+    top: .3rem;
+    right: .3rem;
+}
+
+.col-right .logo-small {
+    width: 40%;
+    margin: 1rem;
+    margin-bottom: 5rem;
+    margin-top: 5rem;
+}
+
+.datetime-container div {
+    text-align: center;
+    font-size: 3rem;
+    margin: 1rem;
+}
+
+.datetime-container .time {
+    font-weight: bold;
+}
+
+.program-text {
+    position: fixed;
+    bottom: .2rem;
+    right: .2rem;
+    font-size: 1.2rem;
+}
+
+.program-text a {
+    color: var(--text-color);
+}
+
+.countdown {
+    position: absolute;
+    left: 1rem;
+    top: .2rem;
+}
+
+.countdown svg {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 20px;
+    height: 20px;
+    transform: rotateY(-180deg) rotateZ(-90deg);
+}
+
+.countdown svg circle {
+    stroke-dasharray: 56.5486px;
+    stroke-dashoffset: 0px;
+    stroke-linecap: round;
+    stroke-width: 2px;
+    stroke: white;
+    fill: none ;
+}
+
+@keyframes countdown {
+    from {
+        stroke-dashoffset: 0px;
+    }
+    to {
+        stroke-dashoffset: 56.5486px;
+    }
+}
+
+.kavarna-cajovna-container {
+    padding: 1rem;
+    height: 300px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+
+.kavarna-cajovna-container h1 {
+    margin: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.kavarna-cajovna-container > div {
+    display: flex;
+    height: 6.4rem;
+}
+
+.kavarna-cajovna-item {
+    background-color: var(--program-item-color);
+    border-radius: var(--border-radius);
+    color: var(--bg-color);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 320px;
+    min-width: fit-content;
+    margin: 0 .7rem;
+    height: 100%;
+}
+
+.kavarna-cajovna-item .name {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.kavarna-cajovna-item .price {
+    margin-top: .4rem;
+    font-size: 22px;
+}
